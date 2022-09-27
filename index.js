@@ -1,9 +1,9 @@
-const http = require("http");
-const fs = require("fs");
+let http = require("http")
+let fs = require("fs")
 
 let homeContent = "";
 let projectContent = "";
-//let registrationContent = "";
+let registrationContent = "";
 
 fs.readFile("home.html", (err, home) => {
   if (err) {
@@ -19,25 +19,30 @@ fs.readFile("project.html", (err, project) => {
   projectContent = project;
 });
 
-// fs.readFile("registration.html", (err, project) => {
-//   if (err) {
-//     throw err;
-//   }
-//   registrationContent = project;
-// });
+fs.readFile("registration.html", (err, registration) => {
+  if (err) {
+    throw err;
+  }
+  registrationContent = registration;
+});
 
-http.createServer((request, response) => {
-    let url = request.url;
-    response.writeHead(200, { "Content-Type": "text/html" });
-    switch (url) {
-      case "/project":
-        response.write(projectContent);
-        response.end();
-        break;
-      default:
-        response.write(homeContent);
-        response.end();
-        break;
-    }
-  })
-  .listen(3000);
+http.createServer(function (req,res) {
+  res.writeHead(200, 
+    {'Content-Type': 'text/html'});
+    var url = req.url;
+    if(url ==='/home.html') {
+        // res.write(' Welcome to home page');
+        res.write(homeContent) 
+        res.end(); 
+     } else if(url ==='/project.html') {
+        // res.write(' Welcome to project page');
+        res.write(projectContent) 
+        res.end(); 
+     } else if(url ==='/registration.html') {
+      res.write(registrationContent);
+      res.end();
+     } else {
+      res.write(homeContent) 
+      res.end(); 
+     }
+}).listen(5000)
