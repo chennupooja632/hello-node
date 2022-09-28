@@ -31,19 +31,38 @@ http.createServer(function (req,res) {
   res.writeHead(200, 
     {'Content-Type': 'text/html'});
     var url = req.url;
-    if(url ==='/home.html') {
-        // res.write(' Welcome to home page');
-        res.write(homeContent) 
-        res.end(); 
-     } else if(url ==='/project.html') {
-        // res.write(' Welcome to project page');
-        res.write(projectContent) 
-        res.end(); 
-     } else if(url ==='/registration.html') {
-      res.write(registrationContent);
-      res.end();
-     } else {
-      res.write(homeContent) 
-      res.end(); 
-     }
+    switch (url) {
+      case "/project":
+        res.write(projectContent);
+        res.end();
+        break;
+      case "/registration":
+        res.write(registrationContent);
+        res.end();
+        break;
+      // case "/project":
+      //   res.write(Content);
+      //   res.end();
+      //   break;
+      default:
+        res.write(homeContent);
+        res.end();
+        break;
+    } 
+    // if(url ==='/home') {
+    //     // res.write(' Welcome to home page');
+    //     res.write(homeContent) 
+    //     res.end(); 
+    //  } else if(url ==='/project') {
+    //     // res.write(' Welcome to project page');
+    //     res.write(projectContent) 
+    //     res.end(); 
+    //  } else if(url ==='/registration') {
+    //   res.write(registrationContent);
+    //   res.end();
+    //  } else {
+    //   console.log("Hello")
+    //   res.write(homeContent) 
+    //   res.end(); 
+    //  }
 }).listen(parseInt(args[0].slice(7)))
