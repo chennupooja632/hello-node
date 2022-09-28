@@ -1,5 +1,6 @@
-let http = require("http")
-let fs = require("fs")
+const http = require("http")
+const fs = require("fs")
+const args = (process.argv.slice(2));
 
 let homeContent = "";
 let projectContent = "";
@@ -45,4 +46,4 @@ http.createServer(function (req,res) {
       res.write(homeContent) 
       res.end(); 
      }
-}).listen(5000)
+}).listen(parseInt(args[0].slice(7)))
